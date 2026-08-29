@@ -17,6 +17,7 @@ export function registerScannerRoutes(router) {
       const findings = security.scanSecrets(text, options || {});
 
       // Explicitly verify no finding exposes a raw secret.
+      // All findings must have a redactedValue field — never return rawValue.
       const safeFindings = findings.map(f => ({
         ruleId: f.ruleId,
         ruleName: f.ruleName,
@@ -25,7 +26,7 @@ export function registerScannerRoutes(router) {
         column: f.column,
         matchLength: f.matchLength,
         redactedValue: f.redactedValue,
-        entropy: f.entropy
+        entropy: f.entropy  // Only present for high-entropy scan results
       }));
 
       res.json({ findings: safeFindings, totalCount: safeFindings.length });
