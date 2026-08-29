@@ -1,0 +1,8 @@
+// These should NOT trigger the scanner
+const AKIA_SHORT = "AKIA"; // Too short
+const ghp_wrong = "ghp_123"; // Too short
+const public_key = `-----BEGIN PUBLIC KEY-----
+MIIBIjANBgkqhkiG9w0
+-----END PUBLIC KEY-----`;
+const shortPassword = "pass";
+const someText = "This is just a normal sentence with some entropy but not enough to be flagged.";
